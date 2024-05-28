@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+    const navigate= useNavigate();
 
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
@@ -24,6 +27,13 @@ export default function Login() {
                 password: pw,
             }).then((res) => {
                 console.log(res);
+                if(res.data ===true){
+                    console.log("로그인 성공");
+                    //페이지이동
+                    navigate('/memberList')
+                }else{
+                    console.log("로그인 실패");
+                }
             }).catch((err) => {
                 console.log("로그인 실패!");
                 console.log(err);
