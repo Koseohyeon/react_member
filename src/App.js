@@ -22,7 +22,7 @@ function App() {
           <Route path="/detail/:id" exact={true} element={<MemberDetail />} />
           <Route path="/bookUpload" exact={true} element={<BookUpload />} />
           <Route path="/booklist" exact={true} element={<Booklist />} />
-          <Route path="/detail/:id" exact={true} element={<Bookdetail />} />
+          <Route path="/book/detail/:id" exact={true} element={<Bookdetail />} />
         </Routes>
       </Container>
     </div>

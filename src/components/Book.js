@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 const Book = (props) => {
   const { id, title, writher, publisher, year, bookImage } = props.book;
 
-  console.log('Book imageUrl:', bookImage);
+
+  // 이미지 경로 설정
+  const imageUrl = `http://localhost:8088${bookImage}`;
 
   return (
     <Card className="d-flex flex-row" style={{ alignItems: 'center' }}>
@@ -15,12 +17,12 @@ const Book = (props) => {
         <Card.Text>{writher}</Card.Text>
         <Card.Text>{publisher}</Card.Text>
         <Card.Text>{year}</Card.Text>
-        <Link to={'/book/detail/' + id}>상세보기</Link>
+        <Link to={`/book/detail/${id}`}>상세보기</Link>
       </Card.Body>
       <Card.Img 
         variant="right" 
-        src={bookImage} 
-        alt={"description"} 
+        src={imageUrl} 
+        alt={title} 
         style={{ width: '200px', height: 'auto', objectFit: 'cover' }} 
       />
     </Card>
