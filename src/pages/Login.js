@@ -22,7 +22,7 @@ export default function Login() {
         console.log("ID : ", id, "  PW : ", pw);
 
         axios
-            .post("http://localhost:8080/api/login", {
+            .post("http://localhost:8088/api/login", {
                 email: id,
                 password: pw,
             }).then((res) => {

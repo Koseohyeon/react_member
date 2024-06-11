@@ -6,6 +6,9 @@ import MemberSave from "./pages/MemberSave";
 import Login from "./pages/Login";
 import MemberList from "./pages/MemberList";
 import MemberDetail from "./pages/MemberDetail";
+import BookUpload from "./pages/Book/BookUpload";
+import Bookdetail from "./pages/Book/Bookdetail";
+import Booklist from "./pages/Book/Booklist";
 function App() {
   return (
     <div>
@@ -17,6 +20,9 @@ function App() {
           <Route path="/login" exact={true} element={<Login />} />
           <Route path="/memberList" exact={true} element={<MemberList />} />
           <Route path="/detail/:id" exact={true} element={<MemberDetail />} />
+          <Route path="/bookUpload" exact={true} element={<BookUpload />} />
+          <Route path="/booklist" exact={true} element={<Booklist />} />
+          <Route path="/book/detail/:id" exact={true} element={<Bookdetail />} />
         </Routes>
       </Container>
     </div>
