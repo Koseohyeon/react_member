@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ export default function BookUpload() {
   const [publisher, setPublisher] = useState('');
   const [year, setYear] = useState('');
   const [bookImage, setBookImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const onClickSave = () => {
     const formData = new FormData();
@@ -20,11 +21,11 @@ export default function BookUpload() {
     formData.append('year', year);
     formData.append('bookImage', bookImage);
 
-    axios
-      .post("http://localhost:8088/api/book/save", formData, {
+    axios.post("http://localhost:8088/api/book/save", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          'Content-Type': 'multipart/form-data; charset=UTF-8',
+        },
+        withCredentials: true
       })
       .then((res) => {
         console.log(res.data);
@@ -39,6 +40,12 @@ export default function BookUpload() {
         console.log("책 등록 실패!");
         console.error(err);
       });
+  };
+
+  const onImageChange = (e) => {
+    const file = e.target.files[0];
+    setBookImage(file);
+    setImagePreview(URL.createObjectURL(file));
   };
 
   return (
@@ -80,13 +87,14 @@ export default function BookUpload() {
         />
       </Form.Group>
       <Form.Group className="mb-2" controlId="bookImage">
-        <Form.Label>이미지 주소</Form.Label>
+        <Form.Label>이미지 업로드</Form.Label>
         <Form.Control
           type="file"
-          onChange={(e) => setBookImage(e.target.files[0])}
+          onChange={onImageChange}
           required
         />
       </Form.Group>
+      {imagePreview && <Image src={imagePreview} alt="미리보기" thumbnail />}
       <Button className="w-100" variant="primary" onClick={onClickSave}>
         책 등록
       </Button>
